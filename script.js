@@ -46,52 +46,74 @@ document.getElementById("check").onclick = () => {
     let input = document.getElementById("wiek");
     let rawValue = input.value;
     let wiek = parseInt(rawValue);
+    let element = document.createElement("p");
+    let historyElement = document.getElementById("history");
+    if(historyElement.childNodes.length == 10){
+        historyElement.removeChild(historyElement.lastChild)
+    }
     if (isNaN(wiek)) {
-        let element = document.createElement("p");
-        let historyElement = document.getElementById("history");
+     
         element.classList.add("error")
         element.innerText = `Błędna wartość w polu sprawdź wiek '${rawValue}' nie jest prawidłowym wiekiem`
         historyElement.insertBefore(element, historyElement.firstChild)
+    
         setTimeout(() => {
+            try{
             historyElement.removeChild(element)
+            }
+            catch(e){
+                console.log(e)
+            }
         }, 10 * 1000);
         return;
     }
     if (wiek < 0) {
-        let element = document.createElement("p");
-        let historyElement = document.getElementById("history");
         element.classList.add("error")
         element.innerText = `Błędna wartość w polu sprawdź wiek '${rawValue}' jest ujemna`
         historyElement.insertBefore(element, historyElement.firstChild)
         setTimeout(() => {
-            historyElement.removeChild(element)
+            try{
+                historyElement.removeChild(element)
+                }
+                catch(e){
+                    console.log(e)
+                }
         }, 10 * 1000);
         return;
 
 
     }
     if (wiek >= 18) {
-        let element = document.createElement("p");
-        let historyElement = document.getElementById("history");
         element.classList.remove("error")
         element.innerText = "legalne"
         historyElement.insertBefore(element, historyElement.firstChild)
         setTimeout(() => {
-            historyElement.removeChild(element)
+            try{
+                historyElement.removeChild(element)
+                }
+                catch(e){
+                    console.log(e)
+                }
         }, 10 * 1000);
         return;
     }
     if (wiek < 18) {
-        let element = document.createElement("p");
-        let historyElement = document.getElementById("history");
         let diffrence = 18 - wiek;
         element.classList.remove("error")
         element.innerText = `niestety brakuje ci jeszcze ${diffrence} lat`
         historyElement.insertBefore(element, historyElement.firstChild)
         setTimeout(() => {
-            historyElement.removeChild(element)
+            try{
+                historyElement.removeChild(element)
+                }
+                catch(e){
+                    console.log(e)
+                }
         }, 10 * 1000);
         return;
 
     }
 }
+setInterval(() => {
+    console.log("upłyneło 10 sek.")
+}, 10 * 1000);
